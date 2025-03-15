@@ -1,8 +1,6 @@
 #include <iostream>
 #include <stdexcept>
 #include <vector>
-#include <windows.h>
-
 
 class Matrix {
 private:
@@ -13,11 +11,7 @@ public:
     Matrix(){
         rows_ = 2;
         cols_ = 2;
-        for(int i = 0; i < 2; i++){
-            for(int j = 0; j < 2; j++){
-                matrix_[i][j] = 0;
-            }
-        }
+        matrix_.resize(rows_, std::vector<double>(cols_, 0));
     }
 
     Matrix(const Matrix& other){
@@ -36,11 +30,7 @@ public:
     Matrix(int rows, int cols){
         rows_ = rows;
         cols_ = cols;
-        for(int i = 0; i < cols; i++){
-            for(int j = 0; j < rows; j++){
-                matrix_[i][j] = 0;
-            }
-        }
+        matrix_.resize(rows_, std::vector<double>(cols_, 0));
     }
 
     ~Matrix() = default;

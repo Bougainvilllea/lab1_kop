@@ -168,7 +168,7 @@ public:
 
         return det;
     }
-//Вычисляет матрицу алгебраических дополнений текущей матрицы и возвращает ее.	\
+        // Вычисляет матрицу алгебраических дополнений текущей матрицы и возвращает ее.
     Matrix CalcComplements() const {
         if (rows_ != cols_) {
             throw std::invalid_argument("the matrix must be square");
@@ -194,7 +194,7 @@ public:
         }
         return result;
     }
-//Вычисляет и возвращает обратную матрицу.	Определитель матрицы равен 0
+    //Вычисляет и возвращает обратную матрицу.	Определитель матрицы равен 0
     Matrix InverseMatrix() const {
         if (rows_ != cols_) {
             throw std::invalid_argument("the matrix must be square");
@@ -286,17 +286,27 @@ int main() {
     // Создание матриц
     Matrix mat1(2, 2); // Матрица 2x2, заполненная нулями
     Matrix mat2(2, 2);
+    Matrix mat6(2, 2);
 
     // Заполнение матриц значениями
-    //determinant = 0 (mat1)
+    //determinant = 0 (mat6)
     mat1(0, 0) = 1; mat1(0, 1) = 2;
     mat1(1, 0) = 3; mat1(1, 1) = 4;
 
     mat2(0, 0) = 5; mat2(0, 1) = 6;
     mat2(1, 0) = 7; mat2(1, 1) = 8;
+    
+    mat6(0, 0) = 1; mat6(0, 1) = 2;
+    mat6(1, 0) = 2; mat6(1, 1) = 4;
+    
+    std::cout << "Matrix 6:" << std::endl;
+    mat6.show();
+    
+    double det6 = mat6.Determinant();
+    std::cout << "\nDeterminant of Matrix 6: " << det6 << std::endl;
 
     // Вывод матриц
-    std::cout << "Matrix 1:" << std::endl;
+    std::cout << "\nMatrix 1:" << std::endl;
     mat1.show();
     std::cout << "\nMatrix 2:" << std::endl;
     mat2.show();

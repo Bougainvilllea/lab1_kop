@@ -52,7 +52,7 @@ public:
         }
     }
 
-
+// Проверяет матрицы на равенство между собой.	
     bool EqMatrix(const Matrix& other) const {
         if (rows_ != other.rows_ || cols_ != other.cols_) {
             return false;
@@ -67,7 +67,7 @@ public:
         }
         return true;
     }
-
+//Прибавляет вторую матрицы к текущей	различная размерность матриц
     void SumMatrix(const Matrix& other) {
         if (rows_ != other.rows_ || cols_ != other.cols_) {
             throw std::invalid_argument("can't sum matrix");
@@ -78,7 +78,7 @@ public:
             }
         }
     }
-
+//Вычитает из текущей матрицы другую
     void SubMatrix(const Matrix& other) {
         if (rows_ != other.rows_ || cols_ != other.cols_) {
             throw std::invalid_argument("matrices cannot be subtracted");
@@ -89,7 +89,7 @@ public:
             }
         }
     }
-
+//Умножает текущую матрицу на число.	
     void MulNumber(const double num) {
         for (int i = 0; i < rows_; ++i) {
             for (int j = 0; j < cols_; ++j) {
@@ -97,7 +97,7 @@ public:
             }
         }
     }
-
+//Умножает текущую матрицу на вторую.	число столбцов первой матрицы не равно числу строк второй матрицы
     void MulMatrix(const Matrix& other) {
         if (cols_ != other.rows_) {
             throw std::invalid_argument("first matrix cols != second matrix rows");
@@ -112,7 +112,7 @@ public:
         }
         *this = result;
     }
-
+//Создает новую транспонированную матрицу из текущей и возвращает ее.	
     void Transpose() {
         Matrix result(cols_, rows_);
         for (int i = 0; i < rows_; ++i) {
@@ -122,7 +122,13 @@ public:
         }
         *this = result;
     }
-
+//Вычисляет и возвращает определитель текущей матрицы
+//Метод Гаусса с частичным выбором ведущего элемента
+//приводится к верхнетреугольному виду с использованием метода Гаусса.
+//На каждом шаге выбирается ведущий элемент 
+//(строка с максимальным значением в текущем столбце), чтобы минимизировать ошибки.
+//Определитель вычисляется как произведение диагональных элементов, 
+//с учётом изменений знака при перестановке строк
     double Determinant() const {
         if (rows_ != cols_) {
             throw std::invalid_argument("the matrix must be square");
@@ -162,7 +168,7 @@ public:
 
         return det;
     }
-
+//Вычисляет матрицу алгебраических дополнений текущей матрицы и возвращает ее.	\
     Matrix CalcComplements() const {
         if (rows_ != cols_) {
             throw std::invalid_argument("the matrix must be square");
@@ -188,7 +194,7 @@ public:
         }
         return result;
     }
-
+//Вычисляет и возвращает обратную матрицу.	Определитель матрицы равен 0
     Matrix InverseMatrix() const {
         if (rows_ != cols_) {
             throw std::invalid_argument("the matrix must be square");
@@ -273,12 +279,6 @@ public:
         return matrix_[i][j];
     }
 
-    const double& operator()(int i, int j) const {
-        if (i < 0 || i >= rows_ || j < 0 || j >= cols_) {
-            throw std::out_of_range("Index incorrect");
-        }
-        return matrix_[i][j];
-    }
 };
 
 
@@ -288,6 +288,7 @@ int main() {
     Matrix mat2(2, 2);
 
     // Заполнение матриц значениями
+    //determinant = 0 (mat1)
     mat1(0, 0) = 1; mat1(0, 1) = 2;
     mat1(1, 0) = 3; mat1(1, 1) = 4;
 
